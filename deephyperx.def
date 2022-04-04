@@ -1,0 +1,69 @@
+Bootstrap: docker
+From: ubuntu:21.04
+
+%setup
+    # Create a directory called "workspace" at the root of the image's file system.
+    mkdir ${SINGULARITY_ROOTFS}/workspace
+    # Create a directory called "data" and a directory called "Datasets" inside that folder on the host system.
+    mkdir -p data/Datasets
+
+%files
+    # Copy files from the host machine to the workspce folder on the Singularity image.
+    /vagrant/main.py /workspace
+    /vagrant/models.py /workspace
+    /vagrant/datasets.py /workspace
+    /vagrant/custom_datasets.py /workspace
+    /vagrant/inference.py /workspace
+    /vagrant/utils.py /workspace
+    /vagrant/License /workspace
+    /vagrant/README.md /workspace
+    /vagrant/requirements.txt /workspace
+    /vagrant/start.sh /workspace
+    
+%environment
+    # Set environment variables
+    export LISTEN_PORT=8097
+    export LC_ALL=C
+    export PATH=/opt/conda/bin:$PATH
+    export DEBIAN_FRONTEND=noninteractive
+
+%post
+    # Install necessary packages
+    apt-get update 
+    apt-get install -y curl
+    apt-get install -y tzdata
+    apt-get install -y bzip2
+    apt-get install -y ca-certificates
+    ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+    dpkg-reconfigure --frontend noninteractive tzdata
+    apt install -y python3-pip
+    rm -rf /var/lib/apt/lists/*
+    curl -o ~/miniconda.sh -O  https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
+    chmod +x ~/miniconda.sh && \
+    ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh
+
+%runscript
+    # When the SIF file is run, it will download the packages listed in requirements.txt if not already installed.
+    pip3 install -q --no-cache-dir --no-warn-script-location -r /workspace/requirements.txt
+    # It will then run start.sh
+    sh /workspace/start.sh
+
+%startscript
+    nc -lp $LISTEN_PORT
+    
+%test
+    grep -q NAME=\"Ubuntu\" /etc/os-release
+    if [ $? -eq 0 ]; then
+        echo "Container base is Ubuntu as expected."
+    else
+        echo "Container base is not Ubuntu."
+    fi
+
+%labels
+    Author d@sylabs.io
+    Version v0.0.1
+
+%help
+    This is a demo container used to illustrate a def file that uses all
+    supported sections.

@@ -1,0 +1,66 @@
+Dataset: IndianPines
+Model: SVM
+Training Percentage: 0.3
+Computation on: CPU 
+Number of Runs: 1
+Confusion matrix:
+[[   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0]
+ [   0    0    0    0    0    0    0    0   31    0    0    1    0    0
+     0    0    0]
+ [   0    0  322    0    0    0    4    0    1    0    0  673    0    0
+     0    0    0]
+ [   0    0   70    0    0    0    1    0    0    0    0  510    0    0
+     0    0    0]
+ [   0    0   79    0    0    0   21    0    1    0    0   63    2    0
+     0    0    0]
+ [   0    0    1    0    0    2   68    0   27    0    0   15    0    0
+   225    0    0]
+ [   0    0    0    0    0   10  488    0    0    0    0    3    0    0
+    10    0    0]
+ [   0    0    0    0    0    0    0    0   18    0    0    2    0    0
+     0    0    0]
+ [   0    0    0    0    0    0    2    0  333    0    0    0    0    0
+     0    0    0]
+ [   0    0    0    0    0    0   14    0    0    0    0    0    0    0
+     0    0    0]
+ [   0    0    0    0    0    0    4    0    3    0    0  673    0    0
+     0    0    0]
+ [   0    0   48    0    0    0    9    0    5    0    0 1657    0    0
+     0    0    0]
+ [   0    0   61    0    0    0    3    0    0    0    0  351    0    0
+     0    0    0]
+ [   0    0    0    0    0    0  110    0    0    0    0    1    0    0
+     0   32    0]
+ [   0    0    0    0    0    2    6    0    0    0    0    0    0    1
+   875    2    0]
+ [   0    0    0    0    0    3  137    0    0    0    0   13    1    2
+    99   15    0]
+ [   0    0    6    0    0    0    0    0    0    0    0    5    0    0
+     0    0   54]]
+---
+Accuracy: 52.209%
+---
+F1 scores:
+	Undefined: nan
+	Alfalfa: 0.000
+	Corn-notill: 0.406
+	Corn-mintill: 0.000
+	Corn: 0.000
+	Grass-pasture: 0.011
+	Grass-trees: 0.708
+	Grass-pasture-mowed: 0.000
+	Hay-windrowed: 0.883
+	Oats: 0.000
+	Soybean-notill: 0.000
+	Soybean-mintill: 0.583
+	Soybean-clean: 0.000
+	Wheat: 0.000
+	Woods: 0.835
+	Buildings-Grass-Trees-Drives: 0.094
+	Stone-Steel-Towers: 0.908
+---
+Kappa: 0.420
+Training time: 0.551
+Testing time: 9.689
+Total time: 10.240
